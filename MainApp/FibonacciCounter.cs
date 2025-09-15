@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -6,28 +7,40 @@ public class FibonacciCounter
 {
     public void Count(long x)
     {
-        var fibonacciNumbers = GetFibonacciNumbers(x);
-
+        var fibonacciNumbers = GetFibonacciNumbersV2(x);
         foreach (var number in fibonacciNumbers)
         {
             Console.WriteLine(number);
         }
     }
 
-    private List<BigInteger> GetFibonacciNumbers(long input)
+    private static List<BigInteger> GetFibonacciNumbers(long input)
     {
-        List<BigInteger> result = new List<BigInteger>();
-        if (input <= 0) return result;
-        if (input >= 1) result.Add(0);
-        if (input >= 2) result.Add(1);
-        BigInteger previous = 0, current = 1, next = 0;
-        for (long i = 2; i < input; i++)
+        var fibonacciNumbers = new List<BigInteger>();
+        BigInteger current = 1, previous = 0, newCurrent = 0;
+        long count = fibonacciNumbers.Count;
+        while (count < input)
         {
-            next = previous + current;
-            result.Add(next);
+            fibonacciNumbers.Add(previous);
+            newCurrent = current + previous;
             previous = current;
-            current = next;
+            current = newCurrent;
+            count++;
         }
-        return result;
+        return fibonacciNumbers;
+    }
+
+    private static IEnumerable GetFibonacciNumbersV2(long input)
+    {
+        BigInteger current = 1, previous = 0, newCurrent = 0;
+        long count = 0;
+        while (count < input)
+        {
+            yield return previous;
+            newCurrent = current + previous;
+            previous = current;
+            current = newCurrent;
+            count++;
+        }
     }
 }
