@@ -14,24 +14,19 @@ internal class Program
     }
 }
 
-public class CustomIterator : IEnumerable<int>, IEnumerator<int>
+public class CustomIterator : IEnumerable<int>, IDisposable
 {
-    private int current = 0;
-    public object Current => current;
-    int IEnumerator<int>.Current => current;
-    IEnumerator IEnumerable.GetEnumerator() => this;
-    IEnumerator<int> IEnumerable<int>.GetEnumerator() => this;
-    public bool MoveNext()
+    public IEnumerator<int> GetEnumerator()
     {
-        if (current < 100)
+        int current = 0; 
+        while (current < 5)
         {
             current++;
-            return true;
+            yield return current;
         }
-        return false;
     }
-    public void Reset()
-    { }
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     public void Dispose()
     { }
+
 }
