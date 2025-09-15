@@ -5,6 +5,8 @@
 		<LangVersion>12.0</LangVersion>
 		<OutputType>Exe</OutputType>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<AssemblyName>Iron Programmer LINQ</AssemblyName>
+		<RootNamespace>Iron Programmer LINQ</RootNamespace>
 	</PropertyGroup>
 
 </Project>
