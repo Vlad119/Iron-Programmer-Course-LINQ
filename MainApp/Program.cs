@@ -7,7 +7,7 @@ internal class Program
     {
         var first = Console.ReadLine().Split(',').Select(int.Parse);
         var second = Console.ReadLine().Split(',').Select(int.Parse);
-        var result = first.SelectMany(first => second,
+        var result = first.SelectMany(res => second,
         (first, second) => $"{first}+{second}={first + second}");
         Console.WriteLine(string.Join("\n", result));
     }
