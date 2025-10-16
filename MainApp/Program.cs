@@ -1,7 +1,11 @@
-﻿internal class Program
+﻿using System;
+using System.Linq;
+
+public static class Program
 {
-    static void Main(string[] args)
+    public static void Main()
     {
-        
+        var result = Console.ReadLine().Split(", ").Select(num => num.Sum(c => c - '0'));
+        Console.WriteLine(string.Join(", ", result));
     }
 }
