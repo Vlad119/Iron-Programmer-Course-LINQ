@@ -19,10 +19,9 @@ internal class Program
 
     static string GetHusband(List<Husband> husbands)
     {
-        Husband result = null;
         try
         {
-            result = husbands.SingleOrDefault(x => x.Humor && x.Masculinity && x.Intelligence && x.Decency && x.Benevolence);
+            var result = husbands.SingleOrDefault(x => x.Humor && x.Masculinity && x.Intelligence && x.Decency && x.Benevolence);
             return result?.Name ?? "Еще не время";
         }
         catch
