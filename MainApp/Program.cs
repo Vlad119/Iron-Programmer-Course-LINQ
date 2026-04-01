@@ -8,6 +8,6 @@ internal class Program
         var input = Console.ReadLine().Split().Select(int.Parse);
         var r1 = input.Where(x => x % 2 == 0).Distinct().Sum();
         var r2 = input.Where(x => x % 2 != 0).Distinct().Sum();
-        Console.WriteLine(r1 - r2 + "");
+        Console.WriteLine(r1 - r2);
     }
 }
