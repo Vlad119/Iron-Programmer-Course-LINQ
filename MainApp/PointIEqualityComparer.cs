@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class PointIEqualityComparer : IEqualityComparer<Point>
+public class StudentIEqualityComparer : IEqualityComparer<Student>
 {
-    public bool Equals(Point x, Point y)
+    public bool Equals(Student x, Student y)
     {
-        return x.X == y.X && x.Y == y.Y ;
+        return x.Age == y.Age && x.Name == y.Name ;
     }
 
-    public int GetHashCode(Point obj)
+    public int GetHashCode(Student obj)
     {
-        return HashCode.Combine(obj.X, obj.Y);
+        return HashCode.Combine(obj.Age, obj.Name);
     }
 }
