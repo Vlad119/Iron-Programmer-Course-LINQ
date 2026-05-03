@@ -10,10 +10,19 @@ internal class Program
         var order = new Dictionary<string, int>();
         int originalIndex = 0;
         string line;
-        while ((line = Console.ReadLine()) != "")
+        int blockCount = 0;
+        while (blockCount <= 48 && !string.IsNullOrEmpty(line = Console.ReadLine()))
         {
-            if (line == "Недавно решено задач:") continue;
+            if (line == "Недавно решено задач:")
+            {
+                blockCount++;
+                continue;
+            }
             var parts = line.Substring(1).Split(' ', 2);
+            if (parts.Length < 2)
+            {
+                continue;
+            }
             int solved = int.Parse(parts[0]);
             string name = parts[1];
             if (!order.ContainsKey(name))
@@ -29,17 +38,13 @@ internal class Program
                 tasks[name] = solved;
             }
         }
-        var taskList = tasks.Select(x => new { Name = x.Key, Count = x.Value, Order = order[x.Key] }).ToList();
-        taskList.Sort((a, b) => {
-            int countComparison = b.Count.CompareTo(a.Count);
-            if (countComparison != 0) return countComparison;
-            return a.Order.CompareTo(b.Order);
-        });
+        var sortedResults = tasks.OrderByDescending(x => x.Value)
+            .ThenBy(x => order[x.Key]).ToList();
         Console.WriteLine("Кол-во за день:");
-        for (int i = 0; i < taskList.Count; i++)
+        for (int i = 0; i < sortedResults.Count; i++)
         {
-            var item = taskList[i];
-            Console.WriteLine($"{i + 1} {item.Name} {item.Count}");
+            var item = sortedResults[i];
+            Console.WriteLine($"{i + 1} {item.Key} {item.Value}");
         }
     }
 }
